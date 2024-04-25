@@ -1,4 +1,4 @@
-## 4月24 Leetcode （陆辽旭）
+## 4月24日 Leetcode （陆辽旭）
 
 #### 501.二叉搜索树种的众数（[501. 二叉搜索树中的众数 - 力扣（LeetCode）](https://leetcode.cn/problems/find-mode-in-binary-search-tree/description/)）
 
