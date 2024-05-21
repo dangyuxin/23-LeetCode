@@ -1,0 +1,60 @@
+## [980. 不同路径 III](https://leetcode.cn/problems/unique-paths-iii/)
+
+![image-20240521223030849](https://like-a.oss-cn-beijing.aliyuncs.com/img/image-20240521223030849.png)
+
+
+
+```java
+class Solution {
+    boolean[][] vis;
+    int[] dx = { 1, -1, 0, 0 };
+    int[] dy = { 0, 0, 1, -1 };
+    int[][] grid;
+    int nums, step, count;// step总步数，count已走步数
+    int m, n, startx, starty;
+
+    public int uniquePathsIII(int[][] grid) {
+        this.grid = grid;
+        m = grid.length;
+        n = grid[0].length;
+        vis = new boolean[m][n];
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] != -1) {
+                    step++;
+                } 
+                if (grid[i][j] == 1) {
+                    startx = i;
+                    starty = j;
+                }
+            }
+        }
+        dfs(startx, starty);
+        return nums;
+    }
+
+    private void dfs(int row, int col) {// 开始从此格子周围搜索
+        count++;
+        vis[row][col] = true;// 先将此格子记录
+
+        if (grid[row][col] == 2 && count == step) {// 如果遇到终点
+            nums++;
+        }
+
+        else {
+            for (int i = 0; i < 4; i++) {
+                int x = row + dx[i];
+                int y = col + dy[i];
+                if (x >= 0 && x < m && y >= 0 && y < n && !vis[x][y] && grid[x][y] != -1) {
+                    dfs(x, y);
+                }
+            }
+        }
+
+        count--;// 回溯
+        vis[row][col] = false;
+    }
+}
+```
+
