@@ -1,0 +1,48 @@
+## [1219. 黄金矿工](https://leetcode.cn/problems/path-with-maximum-gold/)
+
+![image-20240520222654634](https://like-a.oss-cn-beijing.aliyuncs.com/img/image-20240520222654634.png)
+
+
+
+```java
+class Solution {
+    boolean[][] vis;
+    int[] dx = { 1, -1, 0, 0 };
+    int[] dy = { 0, 0, 1, -1 };
+    int maxValue;
+
+    public int getMaximumGold(int[][] grid) {
+        vis = new boolean[grid.length][grid[0].length];
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] > 0) {
+                    dfs(i, j, 0, grid);
+                }
+            }
+        }
+
+        return maxValue;
+    }
+
+    public void dfs(int row, int col, int value, int[][] grid) {
+        vis[row][col] = true;
+        value += grid[row][col];
+
+        if (value > maxValue) {
+            maxValue = value;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            int x = row + dx[i];
+            int y = col + dy[i];
+            if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length && !vis[x][y] && grid[x][y] != 0) {
+                dfs(x, y, value, grid);// x,y一定为有效格子
+            }
+        }
+
+        vis[row][col] = false;
+        value -= grid[row][col];
+    }
+}
+```
+
